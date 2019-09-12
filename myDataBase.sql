@@ -14,7 +14,7 @@
 
 -- Dumping database structure for bsit23
 CREATE DATABASE IF NOT EXISTS `bsit23` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `bsit23`;
+USE `bsit21`;
 
 -- Dumping structure for table bsit23.user
 CREATE TABLE IF NOT EXISTS `user` (
