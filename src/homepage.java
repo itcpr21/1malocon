@@ -539,6 +539,21 @@ Editframe.setVisible(false);
 
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
        // TODO add your handling code here:
+       try {
+        Class.forName(pclass.forname);
+        Connection con = DriverManager.getConnection(pclass.driver,pclass.us,pclass.ps1);
+        PreparedStatement ps = con.prepareStatement("select * from producttbl where product like ?");
+        ps.setString(1, "%"+search.getText()+"%");
+        ResultSet rs = ps.executeQuery();
+        DefaultTableModel tab = (DefaultTableModel) jTable1.getModel(); tab.setRowCount(0);
+        while(rs.next()){
+            tab.addRow(new Object[]{rs.getString("id"),rs.getString("product"),rs.getString("quantity"),rs.getString("price")});
+        }
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(homepage.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SQLException ex) {
+        Logger.getLogger(homepage.class.getName()).log(Level.SEVERE, null, ex);
+    } 
     }//GEN-LAST:event_searchKeyReleased
 
     /**
