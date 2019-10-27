@@ -70,11 +70,35 @@ public class productclass {
           } catch (ClassNotFoundException ex) {
               Logger.getLogger(productclass.class.getName()).log(Level.SEVERE, null, ex);
           }
-       
    }
+
+
+   public void editqy(int id,int qty){
+           try {
+           Class.forName(forname);
+           Connection con = DriverManager.getConnection(driver,us,ps1);
+           PreparedStatement ps = con.prepareStatement("update producttbl set QUANTITY= (QUANTITY+?) where ID = ?");
+           ps.setInt(1, qty);
+           ps.setInt(2, id);
+           
+           ps.executeUpdate();
+           
+          
+       } catch (ClassNotFoundException ex) {
+           Logger.getLogger(productclass.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (SQLException ex) {
+           Logger.getLogger(productclass.class.getName()).log(Level.SEVERE, null, ex);
+          } 
+           
+   }
+}
+         
+           
+
+
    
            
 
    
    
-}
+
