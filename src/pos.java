@@ -44,6 +44,7 @@ String forname=  "com.mysql.jdbc.Driver";
         jTable1 = new javax.swing.JTable();
         barfield = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,43 +68,49 @@ String forname=  "com.mysql.jdbc.Driver";
         });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ENTER BARCODE");
+        jLabel1.setText("ENTER BARCODE:");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel2.setText("P O S");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(barfield)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(barfield, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(barfield, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(barfield, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +122,13 @@ String forname=  "com.mysql.jdbc.Driver";
 
     private void barfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barfieldActionPerformed
       
-       
+    try {
+        addToCart();
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(pos.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SQLException ex) {
+        Logger.getLogger(pos.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }//GEN-LAST:event_barfieldActionPerformed
 
     /**
@@ -156,8 +169,62 @@ String forname=  "com.mysql.jdbc.Driver";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField barfield;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+public void addToCart() throws ClassNotFoundException, SQLException{ int prodId = Integer.parseInt(barfield.getText());
+    DefaultTableModel tab = (DefaultTableModel) jTable1.getModel();
+        Class.forName(forname);
+        PreparedStatement ps = DriverManager.getConnection(driver, us, ps1).prepareStatement("select * from producttbl where ID = ?");
+        ps.setInt(1, prodId);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){
+            String prod = rs.getString("PRODUCT");
+            int qty = Integer.parseInt(rs.getString("QUANTITY"));
+            float pr = Float.parseFloat(rs.getString("PRICE"));
+            
+            int tabIndex = jTable1.getRowCount() - 1;
+           // System.out.println(tabIndex);
+            if(tabIndex==-1){
+                tab.addRow(new Object[]{prodId,prod,1,pr});
+            }
+            else{ int stat =0;
+                for(int x =0;x<=tabIndex;x++){
+                    int id = Integer.parseInt(jTable1.getValueAt(x, 0).toString());
+                    int qty1 = Integer.parseInt(jTable1.getValueAt(x, 2).toString());
+                    if(id == prodId){
+                        int nwqty = qty1 + 1;
+                        jTable1.setValueAt(nwqty, x, 2);
+                        stat = -1;
+                    }
+                    else{
+                        //stat =0; 
+                   }
+                    
+                }
+                if(stat==-1){
+                     
+                }
+                else{
+                    tab.addRow(new Object[]{prodId,prod,1,pr});
+                }
+                
+                
+                
+            }
+            
+        }
+        int tabSize =  jTable1.getRowCount() -1;
+        for(int y =0; y<=tabSize;y++){
+            float qty = Float.parseFloat(jTable1.getValueAt(y, 2).toString());
+            float price = Float.parseFloat(jTable1.getValueAt(y, 3).toString());
+            float sub = qty * price;
+            jTable1.setValueAt(sub, y, 4);
+        }
+        
+        
+        barfield.setText(""); barfield.requestFocus();
+    }
 }
