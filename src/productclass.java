@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @author LENOVO
  */
 public class productclass {
-      String forname=  "com.mysql.jdbc.Driver";
+   String forname=  "com.mysql.jdbc.Driver";
    String driver = "jdbc:mysql://localhost/bsit21";
    String us = "root";
    String ps1 ="";

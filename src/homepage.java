@@ -24,7 +24,7 @@ message popUp = new message();
 productclass pclass = new productclass();
 int pid =0;
     /**
-     * Creates new form homepage
+     * Creates new form home
      */
     public homepage(String a) {
         initComponents();this.setLocationRelativeTo(null); jLabel1.setText("User: "+a);
@@ -40,7 +40,8 @@ int pid =0;
         ResultSet rs = ps.executeQuery();
         DefaultTableModel tab = (DefaultTableModel) jTable1.getModel(); tab.setRowCount(0);
         while(rs.next()){
-            tab.addRow(new Object[]{rs.getString("id"),rs.getString("product"),rs.getString("quantity"),rs.getString("price")});
+            tab.addRow(new Object[]{rs.getString("id"),
+                rs.getString("product"),rs.getString("quantity"),rs.getString("price")});
         }
     } catch (ClassNotFoundException ex) {
         Logger.getLogger(homepage.class.getName()).log(Level.SEVERE, null, ex);
@@ -450,6 +451,11 @@ int pid =0;
 
         jLabel1.setText("USER:");
 
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
         search.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchKeyReleased(evt);
@@ -458,6 +464,11 @@ int pid =0;
 
         jButton11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton11.setText("SEARCH");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         addquan.setText("ADD QUANTITY");
         addquan.addActionListener(new java.awt.event.ActionListener() {
@@ -527,7 +538,7 @@ int pid =0;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 765, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 765, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -682,6 +693,14 @@ showAll();
 qtyframe.setVisible(false);
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchActionPerformed
 int id1=0;
     /**
      * @param args the command line arguments

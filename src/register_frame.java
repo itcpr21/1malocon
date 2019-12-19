@@ -69,12 +69,22 @@ if(ps1.equals(ps2)){
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         firstn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        firstn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                firstnActionPerformed(evt);
+            }
+        });
 
         lastn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         usern.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         pass1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        pass1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pass1ActionPerformed(evt);
+            }
+        });
         pass1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 pass1KeyReleased(evt);
@@ -82,6 +92,11 @@ if(ps1.equals(ps2)){
         });
 
         pass2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        pass2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pass2ActionPerformed(evt);
+            }
+        });
         pass2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 pass2KeyReleased(evt);
@@ -141,12 +156,11 @@ if(ps1.equals(ps2)){
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(reglab, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(usern, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                                .addComponent(lastn)
-                                .addComponent(firstn)
-                                .addComponent(pass1)
-                                .addComponent(pass2)))
+                            .addComponent(usern, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                            .addComponent(lastn)
+                            .addComponent(firstn)
+                            .addComponent(pass1)
+                            .addComponent(pass2))
                         .addGap(50, 50, 50))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -239,6 +253,18 @@ getPass();
     private void pass2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pass2KeyReleased
 getPass();        // TODO add your handling code here:
     }//GEN-LAST:event_pass2KeyReleased
+
+    private void pass1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pass1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pass1ActionPerformed
+
+    private void pass2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pass2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pass2ActionPerformed
+
+    private void firstnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firstnActionPerformed
 
     /**
      * @param args the command line arguments
